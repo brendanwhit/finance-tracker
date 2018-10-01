@@ -1,2 +1,13 @@
 # finance-tracker
-House my finance tracker
+
+A small side project to help me keep track of my finances better.
+
+First step is to create an interactive widget on my computer that I can keep track of my finances.
+
+Then, I want to move the database to the web so I can add to it from my phone,
+which also requires creating a small app for my phone.
+
+Another option is to get the info from my statements as they are updated to practice with API interfacing.
+That will be for another day.
+
+
