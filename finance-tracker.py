@@ -4,7 +4,7 @@
 # created on: 09-30-2018
 # filename: finance-tracker.py
 # author: brendan
-# last modified: 10-01-2018 10:47
+# last modified: 10-02-2018 09:24
 #-------------------------------------------------------------------------------
 """
 An interactive widget for tracking my finances. Update this feature list as the
@@ -12,7 +12,6 @@ project progesses
 """
 import tkinter as tk
 
-master = tk.Tk()
 
 def makeentry(parent, caption, row, width=None, **options):
     tk.Label(parent, text=caption).grid(row=row)
@@ -23,45 +22,45 @@ def makeentry(parent, caption, row, width=None, **options):
     return entry
 
 
-def expense_widget():
-    def logexpense():
-        expense = line1.get()
-        line1.delete(0,tk.END)
-        reason = line2.get()
-        line2.delete(0,tk.END)
-        method = line3.get()
-        line3.delete(0,tk.END)
-        print(expense, reason, method)
+class Widget():
+    
+    def __init__(self, wtype=['Expense', 'Income']):      
+        self.widget = tk.Tk()
+        self.wtype = wtype
+        
+    def loginfo(self):
+        value = self.line1.get()
+        self.line1.delete(0, tk.END)
+        line2 = self.line2.get()
+        self.line2.delete(0, tk.END)
+        method = self.line3.get()
+        self.line3.delete(0, tk.END)
+        print(self.wtype, value, line2, method)
 
-    expense = tk.Tk()
-    line1 = makeentry(expense, 'Expense:', 0)
-    line2 = makeentry(expense, 'Reason:', 1)
-    line3 = makeentry(expense, 'Method:', 2)
-    log = tk.Button(expense, text='log', width=10, command=logexpense)
-    log.grid(row=3, columnspan=2)
-    close = tk.Button(expense, text='close', width=10, command=expense.destroy)
-    close.grid(row=4, columnspan=2)
+    def makeWidget(self):
+        self.line1 = makeentry(self.widget, 'Value:', 0)
+        if self.wtype == 'Expense':
+            self.line2 = makeentry(self.widget, 'Reason:', 1)
+        else:
+            self.line2 = makeentry(self.widget, 'Source:', 1)
+        self.line3 = makeentry(self.widget, 'Method:', 2)
+        self.log = tk.Button(self.widget, text='log', width=10, 
+                             command=self.loginfo)
+        self.log.grid(row=3, columnspan=2)
+        self.close = tk.Button(self.widget, text='close', width=10,
+                               command=self.widget.destroy)
+        self.close.grid(row=4, columnspan=2)
+
+
+def expense_widget():
+    Widget('Expense').makeWidget()
+
 
 def income_widget():
-    def logincome():
-        income = line1.get()
-        line1.delete(0, tk.END)
-        reason = line2.get()
-        line2.delete(0,tk.END)
-        method = line3.get()
-        line3.delete(0,tk.END)
-        print(income, reason, method)
+    Widget('Income').makeWidget()   
 
-    income = tk.Tk()
-    line1 = makeentry(income, 'Income:', 0)
-    line2 = makeentry(income, 'Reason:', 1)
-    line3 = makeentry(income, 'Method:', 2)
-    log = tk.Button(income, text='log', width=10, command=logincome)
-    log.grid(row=3, columnspan=2)
-    close = tk.Button(income, text='close', width=10, command=income.destroy)
-    close.grid(row=4, columnspan=2)
-    
 
+master = tk.Tk()
 
 tk.Button(master, text='income', width=10, command=income_widget).pack()
 tk.Button(master, text='expense', width=10, command=expense_widget).pack()
