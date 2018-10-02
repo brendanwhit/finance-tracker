@@ -4,7 +4,7 @@
 # created on: 09-30-2018
 # filename: finance-tracker.py
 # author: brendan
-# last modified: 10-02-2018 09:06
+# last modified: 10-02-2018 09:24
 #-------------------------------------------------------------------------------
 """
 An interactive widget for tracking my finances. Update this feature list as the
@@ -12,15 +12,15 @@ project progesses
 """
 import tkinter as tk
 
-master = tk.Tk()
 
 def makeentry(parent, caption, row, width=None, **options):
-        tk.Label(parent, text=caption).grid(row=row)
-        entry = tk.Entry(parent, **options)
-        if width:
-            entry.config(width=width)
-        entry.grid(row=row, column=1)
-        return entry
+    tk.Label(parent, text=caption).grid(row=row)
+    entry = tk.Entry(parent, **options)
+    if width:
+        entry.config(width=width)
+    entry.grid(row=row, column=1)
+    return entry
+
 
 class Widget():
     
@@ -55,9 +55,12 @@ class Widget():
 def expense_widget():
     Widget('Expense').makeWidget()
 
+
 def income_widget():
     Widget('Income').makeWidget()   
 
+
+master = tk.Tk()
 
 tk.Button(master, text='income', width=10, command=income_widget).pack()
 tk.Button(master, text='expense', width=10, command=expense_widget).pack()
