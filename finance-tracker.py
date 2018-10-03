@@ -4,13 +4,14 @@
 # created on: 09-30-2018
 # filename: finance-tracker.py
 # author: brendan
-# last modified: 10-02-2018 09:24
+# last modified: 10-02-2018 21:08
 #-------------------------------------------------------------------------------
 """
 An interactive widget for tracking my finances. Update this feature list as the
 project progesses
 """
 import tkinter as tk
+from database_manager import update_db
 
 
 def makeentry(parent, caption, row, width=None, **options):
@@ -35,7 +36,7 @@ class Widget():
         self.line2.delete(0, tk.END)
         method = self.line3.get()
         self.line3.delete(0, tk.END)
-        print(self.wtype, value, line2, method)
+        update_db(value, line2, method, self.wtype)
 
     def makeWidget(self):
         self.line1 = makeentry(self.widget, 'Value:', 0)
