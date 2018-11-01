@@ -4,33 +4,38 @@
 # created on: 10-02-2018
 # filename: database-setup.py
 # author: brendan
-# last modified: 10-02-2018 20:36
+# last modified: 11-01-2018 12:28
 #-------------------------------------------------------------------------------
 """
 Short script to create the databases
 """
-import sqlite3
+import MySQLdb as mdb
 
-conn = sqlite3.connect('finances.db')
+finances_db = mdb.connect('localhost', 'finance_tracker', 'financesRFun',
+                          'Finances')
 
-c = conn.cursor()
+cur = finances_db.cursor()
 
 # create the income table
-c.execute('''CREATE TABLE income (
-    id INT PRIMARY KEY,
-    cur_timestamp TIMESTAMP(8),
-    value NUMERIC(20),
-    source VARCHAR(200),
-    method VARCHAR(100))''')
+cur.execute('''CREATE TABLE income (
+    id INT NOT NULL AUTO_INCREMENT,
+    cur_time DATETIME default CURRENT_TIMESTAMP,
+    value DECIMAL(20),
+    source VARCHAR(255),
+    method VARCHAR(155),
+    PRIMARY KEY(id)
+)''')
 
 # create the expense table
-c.execute('''CREATE TABLE expense (
-    id INT PRIMARY KEY,
-    cur_timestamp TIMESTAMP(8),
-    value NUMERIC(20),
+cur.execute('''CREATE TABLE expense (
+    id INT NOT NULL AUTO_INCREMENT,
+    cur_time DATETIME default CURRENT_TIMESTAMP,
+    value DECIMAL(20),
     reason VARCHAR(200),
-    method VARCHAR(200))''')
+    method VARCHAR(200),
+    PRIMARY KEY(id)
+)''')
 
-conn.commit()
-conn.close()
+finances_db.commit()
+finances_db.close()
 
