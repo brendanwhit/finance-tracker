@@ -4,7 +4,7 @@
 # created on: 10-02-2018
 # filename: database-setup.py
 # author: brendan
-# last modified: 11-01-2018 12:28
+# last modified: 11-01-2018 18:58
 #-------------------------------------------------------------------------------
 """
 Short script to create the databases
@@ -20,7 +20,7 @@ cur = finances_db.cursor()
 cur.execute('''CREATE TABLE income (
     id INT NOT NULL AUTO_INCREMENT,
     cur_time DATETIME default CURRENT_TIMESTAMP,
-    value DECIMAL(20),
+    value DECIMAL(20,2),
     source VARCHAR(255),
     method VARCHAR(155),
     PRIMARY KEY(id)
@@ -30,7 +30,7 @@ cur.execute('''CREATE TABLE income (
 cur.execute('''CREATE TABLE expense (
     id INT NOT NULL AUTO_INCREMENT,
     cur_time DATETIME default CURRENT_TIMESTAMP,
-    value DECIMAL(20),
+    value DECIMAL(20,2),
     reason VARCHAR(200),
     method VARCHAR(200),
     PRIMARY KEY(id)
