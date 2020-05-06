@@ -10,4 +10,7 @@ which also requires creating a small app for my phone.
 Another option is to get the info from my statements as they are updated to practice with API interfacing.
 That will be for another day.
 
+## Server
 
+My finance tracker will be hosted using NGINX software on my backup laptop.
+[Installation information](https://nginx.org/en/linux_packages.html#Ubuntu)
